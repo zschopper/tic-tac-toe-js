@@ -1,22 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Indie+Flower&family=Montserrat&display=swap');
 * {
+    /* reset */
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+body {
+    background-color: white;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Indie Flower', cursive;
+    margin: 10px;
+}
+
+main {
+    width: 960px;
+    margin: 20px auto;
+    background-color: blanchedalmond;
+    border: 3px solid tan;
+}
+
+:root {
+    --meret: 3;
+    --szelesseg: 500px;
+    --gap: 3px;
+    --cellameret: calc((100% - ((var(--meret) - 1) * var(--gap))) / var(--meret));
+}
+
 .jatekter {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-gap: var(--gap);
+    margin: 20px auto 20px;
+    width: var(--szelesseg);
+    height: var(--szelesseg);
+    border: 3px solid tan;
+    grid-template-columns: repeat(var(--meret), var(--cellameret));
+    grid-template-rows: repeat(var(--meret), var(--cellameret));
+    grid-auto-rows: calc(var(--szelesseg) / var(--meret));
+    grid-auto-columns: calc(var(--szelesseg) / var(--meret));
+    font-family: 'Indie Flower', cursive;
+    font-size: 60px;
+    font-weight: bold;
+    background-color: tan;
 }
 
 .elem {
-    border: 1px solid navy;
-    line-height: 30px;
+    text-align: center;
+    background-color: white;
 }
 
 p {
-    border: 1px solid red;
-    text-align: center;
+    vertical-align: middle;
+    display: grid;
+    align-items: center;
+    justify-items: center;
     height: 100%;
+}
+
+.figura-zold {
+    color: green;
+}
+
+.figura-piros {
+    color: red;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+}
+
+footer a {
+    font-family: Gabarito, sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: dotted;
 }

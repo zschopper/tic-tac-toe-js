@@ -1,8 +1,7 @@
-import Elem from "./Elem.js";
 import Jatekter from "./Jatekter.js";
 
 $(function () {
-
-    let jatek = new Jatekter($(".jatekter"));
+    const MERET = 5;
+    let jatek = new Jatekter($(".jatekter"), MERET);
 
 })

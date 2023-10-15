@@ -1,19 +1,36 @@
+import Elem from "./Elem.js";
+
 export default class Jatekter {
     #szuloElem
+    #meret
+    #lepes
 
-    constructor(szuloElem) {
+    constructor(szuloElem, meret) {
         this.#szuloElem = szuloElem;
+        this.#meret = meret;
         let elemek = [];
-        for (let i = 0; i < 9; i++) {
-            elemek.push(new Elem(this.#szuloElem));
-            let lepes = 0;
-            let ertek = "";
-            $(window).on("elemKivalaszt", (event) => {
-                console.log("kivalaszt")
-                lepes++;
-                event.detail.setErtek(lepes % 2? "O": "X");
-            })
+
+        $(":root").css("--meret", meret);
+
+        for (let i = 0; i < this.#meret; i++) {
+            elemek.push([]);
+            for (let j = 0; j < this.#meret; j++) {
+                let elem = new Elem(this.#szuloElem);
+                elem.poz = { x: j, y: i }
+                elemek[i].push(elem);
+            }
         }
 
+        this.#lepes = 0;
+        $(window).on("elemKivalaszt", (event) => {
+            if (!event.detail.getErtek()) {
+                this.#lepes++;
+                console.log(`kivalaszt: ${this.#lepes}`); // , event.detail
+
+                event.detail.setErtek(this.#lepes % 2 ? "O" : "X");
+            } else {
+                console.log("kivalaszt: " + event.detail.getErtek());
+            }
+        })
     }
 }

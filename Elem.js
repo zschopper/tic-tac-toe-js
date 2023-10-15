@@ -3,31 +3,48 @@ export default class Elem {
     #divElem
     #pElem
     #esemenyem
+
     constructor(szuloElem) {
         this.#szuloElem = szuloElem;
         this.#esemenyem = new CustomEvent("elemKivalaszt", { detail: this });
 
         this.#htmlOsszeallit();
+
         this.#divElem.on("click", (sender) => {
-            console.log("click")
             this.#esemenytrigger();
         })
     }
 
+    getErtek() {
+        return this.#pElem.text();
+    }
+
     setErtek(ertek) {
-        this.#pElem.html(ertek);
+        ertek = ertek.toUpperCase();
+        switch(ertek) {
+            case "O": {
+                this.#pElem.addClass("figura-zold");
+                this.#pElem.removeClass("figura-piros");
+                this.#pElem.html(ertek);
+                break;
+            }
+            case "X": {
+                this.#pElem.removeClass("figura-zold");
+                this.#pElem.addClass("figura-piros");
+                this.#pElem.html(ertek);
+                break;
+            }
+        }
     }
 
     #htmlOsszeallit() {
         let txt = '<div class="elem"><p></p></div>';
         this.#szuloElem.append(txt);
-        this.#divElem = this.#szuloElem.children("div:last");
+        this.#divElem = this.#szuloElem.children("div:last-child");
         this.#pElem = this.#divElem.children("p");
-        console.log(this.#divElem, this.#pElem);
     }
 
     #esemenytrigger() {
-        // const esemenyem = new CustomEvent("elemKivalaszt", { detail: this });
         window.dispatchEvent(this.#esemenyem);
     }
 
